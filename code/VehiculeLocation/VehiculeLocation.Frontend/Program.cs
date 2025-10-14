@@ -16,8 +16,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient("ApiBackend", client =>
 {
     // ATTENTION : Assurez-vous que l'URL corresponde au port réel 
-    // de votre API (MonProjet.API). Par exemple, "https://localhost:7001".
-    client.BaseAddress = new Uri("https://localhost:7001/");
+    // de votre API (MonProjet.API). Par exemple, "http://localhost:5076".
+    client.BaseAddress = new Uri("http://localhost:5076/");
     // Vous pouvez aussi ajouter des en-têtes par défaut ici, comme l'Accept pour le JSON.
     // client.DefaultRequestHeaders.Add("Accept", "application/json"); 
 });

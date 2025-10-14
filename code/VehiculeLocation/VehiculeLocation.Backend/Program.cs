@@ -3,6 +3,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VehiculeLocation.Backend.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,12 @@ builder.Services.AddCors(options =>
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                       });
+});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    // La BDD sera un fichier nommé "MonProjet.db" dans le répertoire de l'application
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 // Add services to the container.

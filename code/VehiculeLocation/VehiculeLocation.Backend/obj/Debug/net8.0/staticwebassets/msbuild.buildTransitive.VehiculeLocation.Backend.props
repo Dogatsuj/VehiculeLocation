@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\VehiculeLocation.Backend.props" />
+</Project>

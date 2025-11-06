@@ -8,7 +8,8 @@
         public float DailyLocationPrice { get; set; }
         public TypeMotorisationEnum Motorisation { get; set; }
         public Boolean AutomaticTransmission { get; set; }
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
+        public List<Location> Locations { get; set; } = new List<Location>();
     }
 
 }

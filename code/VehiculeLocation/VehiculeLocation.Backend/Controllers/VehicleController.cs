@@ -26,6 +26,27 @@ public class VehicleController : ControllerBase
     }
 
     /// <summary>
+    /// Récupère un véhicule par son ID.
+    /// GET: api/Vehicle/5
+    /// </summary>
+    /// <param name="id">L'ID du véhicule à récupérer.</param>
+    /// <returns>Le véhicule correspondant à l'ID spécifié.</returns>
+    /// <response code="200">Retourne le véhicule trouvé.</response>
+    /// <response code="404">Si le véhicule n'existe pas.</response>
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Vehicle>> GetVehicle(int id)
+    {
+        var vehicle = await _context.Vehicules.FindAsync(id);
+
+        if (vehicle == null)
+        {
+            return NotFound();
+        }
+
+        return vehicle;
+    }
+
+    /// <summary>
     /// Récupère la liste de toutes les périodes de location pour un véhicule donné.
     /// GET: api/Vehicule/{vehiculeId}/locations
     /// </summary>

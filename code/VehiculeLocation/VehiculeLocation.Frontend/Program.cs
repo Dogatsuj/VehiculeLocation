@@ -39,7 +39,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Mappage pour les Pages Razor
+// Mappage pour les Pages Razor / Active les routes automatiques
 app.MapRazorPages();
 
 // Si vous utilisez l'architecture MVC (Contrôleurs et Vues):

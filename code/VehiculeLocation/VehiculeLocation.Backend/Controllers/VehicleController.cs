@@ -81,4 +81,66 @@ public class VehicleController : ControllerBase
         // On retourne l'inverse : VRAI si aucune location n'est trouvée (DISPONIBLE).
         return !isBooked;
     }
+
+    /// <summary>
+    /// Recherche des véhicules selon plusieurs critères et disponibilité optionnelle.
+    /// Exemple d'appel :
+    /// GET /api/Vehicle/research?brand=Citroën&seats=5&isAutomaticTransmission=true&dateDebut=2025-11-12&dateFin=2025-11-14
+    /// </summary>
+    [HttpGet("research")]
+    public async Task<ActionResult<IEnumerable<Vehicle>>> Research(
+        [FromQuery] string? brand,
+        [FromQuery] string? model,
+        [FromQuery] int? seats,
+        [FromQuery] float? maxDailyPrice,
+        [FromQuery] bool? isAutomaticTransmission,
+        [FromQuery] TypeMotorisationEnum? motorisation,
+        [FromQuery] DateTime? dateDebut,
+        [FromQuery] DateTime? dateFin)
+    {
+        // Début de la requête
+        var query = _context.Vehicules.AsQueryable();
+
+        // Application des filtres de base
+        if (!string.IsNullOrEmpty(brand))
+            query = query.Where(v => v.Brand.ToLower().Contains(brand.ToLower()));
+
+        if (!string.IsNullOrEmpty(model))
+            query = query.Where(v => v.Model.ToLower().Contains(model.ToLower()));
+
+        if (seats.HasValue)
+            query = query.Where(v => v.Seats == seats.Value);
+
+        if (maxDailyPrice.HasValue)
+            query = query.Where(v => v.DailyRentalPrice <= maxDailyPrice.Value);
+
+        if (isAutomaticTransmission.HasValue)
+            query = query.Where(v => v.IsAutomaticTransmission == isAutomaticTransmission.Value);
+
+        if (motorisation.HasValue)
+            query = query.Where(v => v.Motorisation == motorisation.Value);
+
+        // Si des dates sont fournies, on filtre sur la disponibilité
+        if (dateDebut.HasValue && dateFin.HasValue)
+        {
+            if (dateDebut >= dateFin)
+                return BadRequest("La date de début doit précéder la date de fin.");
+
+            query = query.Where(v =>
+                !_context.Locations.Any(l =>
+                    l.VehiculeId == v.Id &&
+                    l.DateStart < dateFin.Value &&
+                    l.DateEnd > dateDebut.Value
+                )
+            );
+        }
+
+        var result = await query.ToListAsync();
+
+        if (!result.Any())
+            return NotFound("Aucun véhicule ne correspond aux critères de recherche.");
+
+        return Ok(result);
+    }
+
 }

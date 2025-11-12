@@ -5,11 +5,11 @@ using VehiculeLocation.Backend.Models;
 
 [ApiController]
 [Route("api/[controller]")] // L'URL de base sera /api/Vehicule
-public class VehiculeController : ControllerBase
+public class VehicleController : ControllerBase
 {
     private readonly AppDbContext _context;
 
-    public VehiculeController(AppDbContext context)
+    public VehicleController(AppDbContext context)
     {
         _context = context;
     }
@@ -19,7 +19,7 @@ public class VehiculeController : ControllerBase
     /// GET: api/Vehicule
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Vehicule>>> GetVehicules()
+    public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicules()
     {
         // Retourne la liste complète des véhicules de la base de données
         return await _context.Vehicules.ToListAsync();
@@ -30,7 +30,7 @@ public class VehiculeController : ControllerBase
     /// GET: api/Vehicule/{vehiculeId}/locations
     /// </summary>
     [HttpGet("{vehiculeId}/locations")]
-    public async Task<ActionResult<IEnumerable<Location>>> GetLocationsByVehicule(int vehiculeId)
+    public async Task<ActionResult<IEnumerable<Rental>>> GetLocationsByVehicule(int vehiculeId)
     {
         // 1. Vérifier si le véhicule existe
         if (!await _context.Vehicules.AnyAsync(v => v.Id == vehiculeId))

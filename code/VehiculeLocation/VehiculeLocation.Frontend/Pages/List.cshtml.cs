@@ -8,7 +8,7 @@ namespace VehiculeLocation.Frontend.Pages
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public List<Vehicule> Vehicules { get; set; } = new List<Vehicule>();
+        public List<Vehicle> Vehicules { get; set; } = new List<Vehicle>();
 
         public ListModel(IHttpClientFactory httpClientFactory)
         {
@@ -29,7 +29,7 @@ namespace VehiculeLocation.Frontend.Pages
 
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-                    Vehicules = JsonSerializer.Deserialize<List<Vehicule>>(content, options) ?? new List<Vehicule>();
+                    Vehicules = JsonSerializer.Deserialize<List<Vehicle>>(content, options) ?? new List<Vehicle>();
                 }
                 else
                 {

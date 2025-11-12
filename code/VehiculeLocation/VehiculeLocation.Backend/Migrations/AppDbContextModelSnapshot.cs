@@ -17,7 +17,7 @@ namespace VehiculeLocation.Backend.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
 
-            modelBuilder.Entity("VehiculeLocation.Backend.Models.Location", b =>
+            modelBuilder.Entity("VehiculeLocation.Backend.Models.Rental", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,22 +69,28 @@ namespace VehiculeLocation.Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VehiculeLocation.Backend.Models.Vehicule", b =>
+            modelBuilder.Entity("VehiculeLocation.Backend.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("AutomaticTransmission")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Brand")
+                        .HasColumnType("TEXT");
 
-                    b.Property<float>("DailyLocationPrice")
+                    b.Property<float>("DailyRentalPrice")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Modele")
+                    b.Property<bool>("IsAutomaticTransmission")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
@@ -93,7 +99,7 @@ namespace VehiculeLocation.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Place")
+                    b.Property<int>("Seats")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -104,59 +110,67 @@ namespace VehiculeLocation.Backend.Migrations
                         new
                         {
                             Id = 1,
-                            AutomaticTransmission = false,
-                            DailyLocationPrice = 30.5f,
-                            ImagePath = "https://lh6.googleusercontent.com/proxy/HEmJ7BvDYuo0uaBAecqWSianL5MBS7XzuqV7Nu-scTwvXRipC-hl4cd9crmQyWRGlpVFfhzCUNeDJr5najGvzJgFieuCF71nqwFxy22zmJpFOaGjHaieImL9dQCHvliO5n5Z8AgF83m7qs4ntaPlLsE",
-                            Modele = "Renault Clio V",
+                            Brand = "Renault",
+                            DailyRentalPrice = 30.5f,
+                            Description = "Une voiture qui roule",
+                            ImagePath = "https://upload.wikimedia.org/wikipedia/commons/6/6d/Dunkerque-1.jpg",
+                            IsAutomaticTransmission = false,
+                            Model = "Clio V",
                             Motorisation = "Essence",
-                            Place = 5
+                            Seats = 5
                         },
                         new
                         {
                             Id = 2,
-                            AutomaticTransmission = true,
-                            DailyLocationPrice = 65f,
-                            ImagePath = "https://lh6.googleusercontent.com/proxy/HEmJ7BvDYuo0uaBAecqWSianL5MBS7XzuqV7Nu-scTwvXRipC-hl4cd9crmQyWRGlpVFfhzCUNeDJr5najGvzJgFieuCF71nqwFxy22zmJpFOaGjHaieImL9dQCHvliO5n5Z8AgF83m7qs4ntaPlLsE",
-                            Modele = "Peugeot 3008",
+                            Brand = "Peugeot",
+                            DailyRentalPrice = 65f,
+                            Description = "Une voiture qui roule",
+                            ImagePath = "https://upload.wikimedia.org/wikipedia/commons/6/6d/Dunkerque-1.jpg",
+                            IsAutomaticTransmission = true,
+                            Model = "3008",
                             Motorisation = "Diesel",
-                            Place = 5
+                            Seats = 5
                         },
                         new
                         {
                             Id = 3,
-                            AutomaticTransmission = true,
-                            DailyLocationPrice = 25f,
-                            ImagePath = "https://lh6.googleusercontent.com/proxy/HEmJ7BvDYuo0uaBAecqWSianL5MBS7XzuqV7Nu-scTwvXRipC-hl4cd9crmQyWRGlpVFfhzCUNeDJr5najGvzJgFieuCF71nqwFxy22zmJpFOaGjHaieImL9dQCHvliO5n5Z8AgF83m7qs4ntaPlLsE",
-                            Modele = "Renault Twingo",
+                            Brand = "Renault",
+                            DailyRentalPrice = 25f,
+                            Description = "Une voiture qui roule",
+                            ImagePath = "https://upload.wikimedia.org/wikipedia/commons/6/6d/Dunkerque-1.jpg",
+                            IsAutomaticTransmission = true,
+                            Model = "Twingo",
                             Motorisation = "Electrique",
-                            Place = 5
+                            Seats = 5
                         },
                         new
                         {
                             Id = 4,
-                            AutomaticTransmission = false,
-                            DailyLocationPrice = 35f,
-                            ImagePath = "https://lh6.googleusercontent.com/proxy/HEmJ7BvDYuo0uaBAecqWSianL5MBS7XzuqV7Nu-scTwvXRipC-hl4cd9crmQyWRGlpVFfhzCUNeDJr5najGvzJgFieuCF71nqwFxy22zmJpFOaGjHaieImL9dQCHvliO5n5Z8AgF83m7qs4ntaPlLsE",
-                            Modele = "Citroën C3",
+                            Brand = "Citroën",
+                            DailyRentalPrice = 35f,
+                            Description = "Une voiture qui roule",
+                            ImagePath = "https://upload.wikimedia.org/wikipedia/commons/6/6d/Dunkerque-1.jpg",
+                            IsAutomaticTransmission = false,
+                            Model = "C3",
                             Motorisation = "Essence",
-                            Place = 5
+                            Seats = 5
                         });
                 });
 
-            modelBuilder.Entity("VehiculeLocation.Backend.Models.Location", b =>
+            modelBuilder.Entity("VehiculeLocation.Backend.Models.Rental", b =>
                 {
-                    b.HasOne("VehiculeLocation.Backend.Models.Vehicule", "Vehicule")
-                        .WithMany("Locations")
+                    b.HasOne("VehiculeLocation.Backend.Models.Vehicle", "Vehicle")
+                        .WithMany("Rentals")
                         .HasForeignKey("VehiculeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Vehicule");
+                    b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("VehiculeLocation.Backend.Models.Vehicule", b =>
+            modelBuilder.Entity("VehiculeLocation.Backend.Models.Vehicle", b =>
                 {
-                    b.Navigation("Locations");
+                    b.Navigation("Rentals");
                 });
 #pragma warning restore 612, 618
         }

@@ -30,6 +30,7 @@ namespace VehiculeLocation.Frontend.Pages
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
                     Vehicules = JsonSerializer.Deserialize<List<Vehicule>>(content, options) ?? new List<Vehicule>();
+
                 }
                 else
                 {

@@ -10,12 +10,12 @@
 
     <div class="list-container">
 
-        @foreach (var vehicule in Model.Vehicules)
+        @foreach (var vehicle in Model.Vehicles)
         {
             <div class="card" style="width: 18rem;">
-                <img src="@vehicule.ImagePath" class="card-img-top" alt="vehicle image">
+                <img src="@vehicle.ImagePath" class="card-img-top" alt="vehicle image">
                 <div class="card-body">
-                    <h5 class="card-title">@vehicule.Modele</h5>
+                    <h5 class="card-title">@vehicle.Model</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
@@ -66,7 +66,7 @@
 <div class="text-center">
     <h1 class="display-4">All rentable vehicles</h1>
 
-    @if (Model.Vehicules.Any())
+    @if (Model.Vehicles.Any())
     {
         <table class="table table-striped mt-4">
             <thead>
@@ -77,12 +77,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var vehicule in Model.Vehicules)
+                @foreach (var vehicule in Model.Vehicles)
                 {
                     <tr>
                         <td>@vehicule.Id</td>
-                        <td>@vehicule.Modele</td>
-                        <td>@vehicule.Place</td>
+                        <td>@vehicule.Model</td>
+                        <td>@vehicule.Seats</td>
                     </tr>
                 }
             </tbody>

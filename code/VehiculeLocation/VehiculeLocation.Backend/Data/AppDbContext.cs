@@ -15,8 +15,8 @@ namespace VehiculeLocation.Backend.Data
         {
         }
 
-        public DbSet<Vehicule> Vehicules { get; set; } = null!;
-        public DbSet<Location> Locations { get; set; } = null!;
+        public DbSet<Vehicle> Vehicules { get; set; } = null!;
+        public DbSet<Rental> Locations { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,15 +28,15 @@ namespace VehiculeLocation.Backend.Data
 
             // Application du Seeding
             // seeding vehicule
-            modelBuilder.Entity<Vehicule>().HasData(VehiculeSeeder.GetVehiculeSeedData());
+            modelBuilder.Entity<Vehicle>().HasData(VehicleSeeder.GetVehiculeSeedData());
             // seeding location
-            modelBuilder.Entity<Location>().HasData(LocationSeeder.GetLocationSeedData());
+            modelBuilder.Entity<Rental>().HasData(RentalSeeder.GetLocationSeedData());
 
             // Relation des tables
             // Relation one to many de location
-            modelBuilder.Entity<Vehicule>()
-                .HasMany(v => v.Locations) // Un Vehicule a plusieurs Locations
-                .WithOne(l => l.Vehicule)  // Chaque Location appartient à un Vehicule
+            modelBuilder.Entity<Vehicle>()
+                .HasMany(v => v.Rentals) // Un Vehicule a plusieurs Locations
+                .WithOne(l => l.Vehicle)  // Chaque Location appartient à un Vehicule
                 .HasForeignKey(l => l.VehiculeId) // Utilise VehiculeId comme clé étrangère
                 .OnDelete(DeleteBehavior.Cascade); // Les locations sont supprimées si le véhicule l'est
 

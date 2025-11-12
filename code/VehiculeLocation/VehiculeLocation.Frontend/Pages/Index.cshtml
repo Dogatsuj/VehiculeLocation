@@ -1,35 +1,20 @@
 ﻿@page
 @model IndexModel
 @{
-ViewData["Title"] = "VehicleLocation";
+    ViewData["Title"] = "Accueil";
 }
 
 <link rel="stylesheet" href="~/css/home.css" />
 
 <div class="home-container">
-    <div class="main-section">
-            <h1 class="main-heading">Rent a vehicle now !</h1>
-            <p class="sub-heading">Or Rent your own vehicle !</p>
-
-            <a href="/list" class="btn-primary-custom">
-                See rentable vehicles
-            </a>
-
-            <a href="/rent" class="btn-secondary-custom">
-                Rent my vehicle
-            </a>
-    </div>
-
-    <div class="header-container">
-        <div class="logo-section">
-            <span class="logo-text">VehicleLocation</span>
-        </div>
-
-        <nav>
-            <ul class="nav-list">
-                <li><a href="/list" class="nav-link">Vehicles list</a></li>
-                <li><a href="/rent" class="nav-link">Rent my vehicle</a></li>
-            </ul>
-        </nav>
-    </div>
+    <h1 class="main-heading">Rent a vehicle now !</h1>
+    <p class="sub-heading">Or Rent your own vehicle !</p>
+    
+    <a href="/list" class="btn-primary-custom">
+        See rentable vehicles
+    </a>
+    
+    <a href="/rent" class="btn-secondary-custom">
+        Rent my vehicle
+    </a>
 </div>

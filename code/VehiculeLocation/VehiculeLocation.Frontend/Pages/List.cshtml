@@ -10,15 +10,18 @@
 
     <div class="list-container">
 
-
+        @foreach (var vehicle in Model.Vehicles)
+        {
             <div class="card" style="width: 18rem;">
-            <img src="https://www.index-assurance.fr/fichiers/images/peugeot-208-allure.jpg" class="card-img-top" alt="...">
+                <img src="@vehicle.ImagePath" class="card-img-top" alt="vehicle image">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">@vehicle.Model</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
+        }
+        
 
             <div class="card" style="width: 18rem;">
             <img src="https://www.index-assurance.fr/fichiers/images/peugeot-208-allure.jpg" class="card-img-top" alt="...">
@@ -63,7 +66,7 @@
 <div class="text-center">
     <h1 class="display-4">All rentable vehicles</h1>
 
-    @if (Model.Vehicules.Any())
+    @if (Model.Vehicles.Any())
     {
         <table class="table table-striped mt-4">
             <thead>
@@ -74,7 +77,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var vehicule in Model.Vehicules)
+                @foreach (var vehicule in Model.Vehicles)
                 {
                     <tr>
                         <td>@vehicule.Id</td>

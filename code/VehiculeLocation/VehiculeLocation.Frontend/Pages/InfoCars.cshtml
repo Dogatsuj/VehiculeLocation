@@ -21,29 +21,22 @@
                     <p class="car-highlight">Comfort, connectivity and style for your daily drives.</p>
                 </div>
 
-                <form class="booking-form">
+                <form method="post">
                     <label for="startDate">From</label>
                     <div class="input-shell">
-                        <input type="date" id="startDate" name="startDate" placeholder="Select a date" />
-                        <span class="chevron" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </span>
+                        <input type="date" id="startDate" name="dateStart" />
                     </div>
 
                     <label for="endDate">To</label>
                     <div class="input-shell">
-                        <input type="date" id="endDate" name="endDate" placeholder="Select a date" />
-                        <span class="chevron" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </span>
+                        <input type="date" id="endDate" name="dateEnd" />
                     </div>
 
-                    <button type="button" class="cta-button">Book</button>
+                    <input type="hidden" name="vehicleId" value="@Model.Vehicle.Id" />
+
+                    <button type="submit" class="cta-button">Book</button>
                 </form>
+
             </div>
         </div>
 

@@ -22,6 +22,12 @@ builder.Services.AddHttpClient("ApiBackend", client =>
     // client.DefaultRequestHeaders.Add("Accept", "application/json"); 
 });
 
+builder.Services.AddHttpClient("ApiBackend", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5076/");
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
